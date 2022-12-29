@@ -2,7 +2,7 @@
         <head>
         <title>元的計概課程</title>
         <meta charset="utf-8">
-<meta property="head" content="H1">
+<meta property="head" content="H2">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700,900" rel="stylesheet">
         <link rel="stylesheet" href="./../cmsimde/static/chimper/fonts/icomoon/style.css">
@@ -141,7 +141,7 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">cp2022 << <a href='cp2022.html'>Previous</a> <br /><h1>Brython</h1>
+    <div id="tipue_search_content">w15 << <a href='w15.html'>Previous</a> <a href='cp2022.html'>Next</a> >> cp2022<br /><h1>w16</h1>
 <p><a href="https://en.wikipedia.org/wiki/Python_(programming_language)">https://en.wikipedia.org/wiki/Python_(programming_language)</a></p>
 <h4>Examples:</h4>
 <p style="padding-left: 30px;"><a href="https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d">https://gist.github.com/mdecycu/d9082d678096bd58378d6afe2c7fa05d</a></p>
@@ -180,15 +180,48 @@ window.onload=function(){
 brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
 }
 &lt;/script&gt;</pre>
+<pre class="brush:py;auto-links:false;toolbar:false" contenteditable="false">#python
+def sysCall_thread():
+    #global stepx, stepy
+    # uncomment following for async./non-stepped mode:
+    sim.setThreadAutomaticSwitch(True)
+    print( "From threaded Python child script, threadMain")
+    cube=sim.getObject('.')
+    wnum = 2.5
+    hnum = 2.5
+    stepx = 0
+    stepy = 0
+    s = 0.004
+    pos=sim.getObjectPosition(cube,sim.handle_world)
+    while sim.getThreadExistRequest() == False:
+        x = round(pos[0], 2)
+        y = round(pos[1],2)
+        if x &lt; hnum and y == 0:
+            stepx = s
+            stepy = 0
+        elif y &lt; wnum and x == hnum:
+            stepx = 0
+            stepy = s
+        elif x == hnum and y == wnum:
+            stepx = -s
+            stepy = 0
+        elif y == wnum and x == 0:
+            stepx = 0
+            stepy = -s
+        pos[0] = pos[0] + stepx
+        pos[1] = pos[1] + stepy
+        sim.setObjectPosition(cube,sim.handle_world,pos)
+    print("From threaded Python child script, cleanup")</pre>
+<p><br/><br/></p>
 <p>從 1 累加到 100:</p>
 <p><button id="add1to100">1 add to 100</button></p>
 <p>將 iterable 與 iterator <a href="https://home.gamer.com.tw/creationDetail.php?sn=4337438">相關說明</a>, 利用 Brython 與 Ace Editor 整理在這個頁面.</p>
-<!-- 導入 brython 程式庫 -->
+<p><!-- 導入 brython 程式庫 --></p>
 <p>
 <script src="./../cmsimde/static/brython.js"></script>
 <script src="./../cmsimde/static/brython_stdlib.js"></script>
 </p>
-<!-- 啟動 Brython -->
+<p><!-- 啟動 Brython --></p>
 <p>
 <script>
 window.onload=function(){
@@ -290,7 +323,7 @@ doc["add1to100"].bind('click', add)
 </script>
 </p>
 <p><!-- add 1 to 100 結束--></p>
-<!-- editor1 開始 -->
+<p><!-- editor1 開始 --></p>
 <p><!-- 用來顯示程式碼的 editor 區域 --></p>
 <div id="kw_editor1" style="width: 600px; height: 300px;"></div>
 <p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
@@ -306,7 +339,9 @@ doc["add1to100"].bind('click', add)
 <div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console1"></textarea></div>
 <p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
 <div id="brython_div1"></div>
-<!-- editor1 結束 --><hr/><!-- ########################################## -->
+<p><!-- editor1 結束 --></p>
+<hr/>
+<p><!-- ########################################## --></p>
 <p>從 1 累加到 100 part2:</p>
 <p><button id="add1to100part2">1 add to 100</button><button id="cango_three_gears">cango_three_gears</button><button id="bsnake">BSnake</button><button id="aitetris">AI Tetris</button></p>
 <p><!-- 請注意, 這裡使用 Javascript 將 localStorage["kw_py_src2"] 中存在近端瀏覽器的程式碼, 由使用者決定存檔名稱--></p>
@@ -404,7 +439,7 @@ doc["aitetris"].bind("click", aitetris.do)
 </script>
 </p>
 <p><!-- add 1 to 100 part2 結束--></p>
-<!-- editor2 開始 -->
+<p><!-- editor2 開始 --></p>
 <p><!-- 用來顯示程式碼的 editor 區域 --></p>
 <div id="kw_editor2" style="width: 600px; height: 300px;"></div>
 <p><!-- 以下的表單與按鈕與前面的 Javascript doSave 函式以及 FileSaver.min.js 互相配合 --></p>
@@ -420,7 +455,8 @@ doc["aitetris"].bind("click", aitetris.do)
 <div style="width: 100%; height: 100%;"><textarea autocomplete="off" id="kw_console2"></textarea></div>
 <p><!-- Brython 程式執行的結果, 都以 brython_div1 作為切入位置 --></p>
 <div id="brython_div2"></div>
-<!-- editor2 結束 --><hr/><br />cp2022 << <a href='cp2022.html'>Previous</a> </div>
+<p><!-- editor2 結束 --></p>
+<hr/><br />w15 << <a href='w15.html'>Previous</a> <a href='cp2022.html'>Next</a> >> cp2022</div>
         
     <!-- footer -->
       <div class="container">
